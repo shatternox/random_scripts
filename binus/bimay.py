@@ -1,5 +1,3 @@
-# still unfinished
-
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -42,6 +40,7 @@ def login():
         username: f[0],
         password: f[1],
         button: "Login",
+        name1: value1,
         name2: value2
     }
     login = s.post("https://binusmaya.binus.ac.id/login/sys_login.php",
@@ -56,8 +55,12 @@ def get_assignment():
 
     api_course = s.get("https://binusmaya.binus.ac.id/services/ci/index.php/student/init/getCourses",
                        headers=header)
-    print(api_course.text)
+
+    course_data_list = json.loads(api_course.text)
+    
 
 
-login()
-get_assignment()
+if __name__ == "__main__":
+
+    login()
+    get_assignment()
